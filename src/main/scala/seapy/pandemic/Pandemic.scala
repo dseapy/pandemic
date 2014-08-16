@@ -10,6 +10,7 @@ object Pandemic extends App {
     for(n <- c.neighbors){print(s"${n.name} ")}
     println("")
     println(s"Infection Type:\t${c.infection}")
+    println("--------------------------------------------------")
   }
 }
 
@@ -18,64 +19,66 @@ object Infection extends Enumeration {
   val Red, Blue, Yellow, Black = Value
 }
 
-case class City(name: String,
-                infection: Infection,
-                neighbors: collection.mutable.Set[City] = collection.mutable.Set(),
-                infectionCounts: collection.mutable.Map[Infection, Int] = collection.mutable.Map().withDefaultValue(0))
+class City(val name: String,
+           val infection: Infection,
+           val neighbors: collection.mutable.Set[City] = collection.mutable.Set(),
+           val infectionCounts: collection.mutable.Map[Infection, Int] = collection.mutable.Map().withDefaultValue(0)){
+
+}
 
 class Board {
   val cities: Set[City] = {
-    val santiago = City("Santiago", Infection.Yellow)
-    val lima = City("Lima", Infection.Yellow)
-    val bogota = City("Bogota", Infection.Yellow)
-    val buenosAires = City("Buenos Aires", Infection.Yellow)
-    val saoPaulo = City("Sao Paulo", Infection.Yellow)
-    val mexicoCity = City("Mexico City", Infection.Yellow)
-    val losAngeles = City("Los Angeles", Infection.Yellow)
-    val miami = City("Miami", Infection.Yellow)
-    val lagos = City("Lagos", Infection.Yellow)
-    val kinshasa = City("Kinshasa", Infection.Yellow)
-    val johannesburg = City("Johannesburg", Infection.Yellow)
-    val khartoum = City("Khartoum", Infection.Yellow)
+    val santiago = new City("Santiago", Infection.Yellow)
+    val lima = new City("Lima", Infection.Yellow)
+    val bogota = new City("Bogota", Infection.Yellow)
+    val buenosAires = new City("Buenos Aires", Infection.Yellow)
+    val saoPaulo = new City("Sao Paulo", Infection.Yellow)
+    val mexicoCity = new City("Mexico City", Infection.Yellow)
+    val losAngeles = new City("Los Angeles", Infection.Yellow)
+    val miami = new City("Miami", Infection.Yellow)
+    val lagos = new City("Lagos", Infection.Yellow)
+    val kinshasa = new City("Kinshasa", Infection.Yellow)
+    val johannesburg = new City("Johannesburg", Infection.Yellow)
+    val khartoum = new City("Khartoum", Infection.Yellow)
 
-    val sanFrancisco = City("San Francisco", Infection.Blue)
-    val chicago = City("Chicago", Infection.Blue)
-    val atlanta = City("Atlanta", Infection.Blue)
-    val montreal = City("Montreal", Infection.Blue)
-    val washington = City("Washington", Infection.Blue)
-    val newYork = City("New York", Infection.Blue)
-    val london = City("London", Infection.Blue)
-    val madrid = City("Madrid", Infection.Blue)
-    val paris = City("Paris", Infection.Blue)
-    val essen = City("Essen", Infection.Blue)
-    val milan = City("Milan", Infection.Blue)
-    val stPetersburg = City("St. Petersburg", Infection.Blue)
+    val sanFrancisco = new City("San Francisco", Infection.Blue)
+    val chicago = new City("Chicago", Infection.Blue)
+    val atlanta = new City("Atlanta", Infection.Blue)
+    val montreal = new City("Montreal", Infection.Blue)
+    val washington = new City("Washington", Infection.Blue)
+    val newYork = new City("New York", Infection.Blue)
+    val london = new City("London", Infection.Blue)
+    val madrid = new City("Madrid", Infection.Blue)
+    val paris = new City("Paris", Infection.Blue)
+    val essen = new City("Essen", Infection.Blue)
+    val milan = new City("Milan", Infection.Blue)
+    val stPetersburg = new City("St. Petersburg", Infection.Blue)
 
-    val algiers = City("Algiers", Infection.Black)
-    val istanbul = City("Istanbul", Infection.Black)
-    val cairo = City("Cairo", Infection.Black)
-    val moscow = City("Moscow", Infection.Black)
-    val baghdad = City("Baghdad", Infection.Black)
-    val riyadh = City("Riyadh", Infection.Black)
-    val tehran = City("Tehran", Infection.Black)
-    val karachi = City("Karachi", Infection.Black)
-    val mumbai = City("Mumbai", Infection.Black)
-    val delhi = City("Delhi", Infection.Black)
-    val chennai = City("Chennai", Infection.Black)
-    val kolkata = City("Kolkata", Infection.Black)
+    val algiers = new City("Algiers", Infection.Black)
+    val istanbul = new City("Istanbul", Infection.Black)
+    val cairo = new City("Cairo", Infection.Black)
+    val moscow = new City("Moscow", Infection.Black)
+    val baghdad = new City("Baghdad", Infection.Black)
+    val riyadh = new City("Riyadh", Infection.Black)
+    val tehran = new City("Tehran", Infection.Black)
+    val karachi = new City("Karachi", Infection.Black)
+    val mumbai = new City("Mumbai", Infection.Black)
+    val delhi = new City("Delhi", Infection.Black)
+    val chennai = new City("Chennai", Infection.Black)
+    val kolkata = new City("Kolkata", Infection.Black)
 
-    val beijing = City("Beijing", Infection.Red)
-    val seoul = City("Seoul", Infection.Red)
-    val tokyo = City("Tokyo", Infection.Red)
-    val shanghai = City("Shanghai", Infection.Red)
-    val hongKong = City("Hong Kong", Infection.Red)
-    val taipei = City("Taipei", Infection.Red)
-    val osaka = City("Osaka", Infection.Red)
-    val bangkok = City("Bangkok", Infection.Red)
-    val jakarta = City("Jakarta", Infection.Red)
-    val hoChiMinhCity = City("Ho Chi Minh City", Infection.Red)
-    val manila = City("Manila", Infection.Red)
-    val sydney = City("Sydney", Infection.Red)
+    val beijing = new City("Beijing", Infection.Red)
+    val seoul = new City("Seoul", Infection.Red)
+    val tokyo = new City("Tokyo", Infection.Red)
+    val shanghai = new City("Shanghai", Infection.Red)
+    val hongKong = new City("Hong Kong", Infection.Red)
+    val taipei = new City("Taipei", Infection.Red)
+    val osaka = new City("Osaka", Infection.Red)
+    val bangkok = new City("Bangkok", Infection.Red)
+    val jakarta = new City("Jakarta", Infection.Red)
+    val hoChiMinhCity = new City("Ho Chi Minh City", Infection.Red)
+    val manila = new City("Manila", Infection.Red)
+    val sydney = new City("Sydney", Infection.Red)
 
     val edges = Set(
       santiago -> lima, lima -> mexicoCity, lima -> bogota, mexicoCity -> losAngeles, mexicoCity -> chicago,
