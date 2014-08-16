@@ -1,15 +1,14 @@
 package seapy.pandemic
 
-
 import seapy.pandemic.Infection.Infection
 
 object Pandemic extends App {
   val cities = (new Board).cities
-  cities.foreach{ c =>
+  for(c <- cities){
     println(s"City:\t${c.name}")
     print(s"Neighbors:\t")
-    c.neighbors.foreach(n => print(s"${n.name} "))
-    println()
+    for(n <- c.neighbors){print(s"${n.name} ")}
+    println("")
     println(s"Infection Type:\t${c.infection}")
   }
 }
@@ -22,10 +21,10 @@ object Infection extends Enumeration {
 case class City(name: String,
                 infection: Infection,
                 neighbors: collection.mutable.Set[City] = collection.mutable.Set(),
-                infectionCounts: Map[Infection, Int] = Map.withDefaultValue(0))
+                infectionCounts: collection.mutable.Map[Infection, Int] = collection.mutable.Map().withDefaultValue(0))
 
 class Board {
-  val cities = {
+  val cities: Set[City] = {
     val santiago = City("Santiago", Infection.Yellow)
     val lima = City("Lima", Infection.Yellow)
     val bogota = City("Bogota", Infection.Yellow)
@@ -78,7 +77,7 @@ class Board {
     val manila = City("Manila", Infection.Red)
     val sydney = City("Sydney", Infection.Red)
 
-    val edges: Map[City, City] = Map(
+    val edges = Set(
       santiago -> lima, lima -> mexicoCity, lima -> bogota, mexicoCity -> losAngeles, mexicoCity -> chicago,
       mexicoCity -> miami, mexicoCity -> bogota, bogota -> miami, bogota -> buenosAires, bogota -> saoPaulo,
       buenosAires -> saoPaulo, saoPaulo -> madrid, saoPaulo -> lagos, losAngeles -> sydney, losAngeles -> sanFrancisco,
@@ -99,7 +98,7 @@ class Board {
     )
 
     //Add neighbors to all cities with the edges & yield the Set containing all the cities
-    edges.toSet.flatMap{ edge =>
+    edges.flatMap{ edge =>
       edge._1.neighbors.add(edge._2)
       edge._2.neighbors.add(edge._1)
       Set(edge._1, edge._2)
